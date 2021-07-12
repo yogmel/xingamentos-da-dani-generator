@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './App.css';
 import Dia from './data/dia';
 import Mes from './data/mes';
@@ -21,14 +21,18 @@ function getRandomInt(min, max) {
 }
 
 function App() {
-
   const [dia, setDia] = useState('1');
   const [mes, setMes] = useState('janeiro');
   const [cor, setCor] = useState('branca');
   const [xingamento, setXingamento] = useState();
+
+  const quoteRef = useRef(null)
   
   const generateCurse = () => {
     setXingamento(`${Dia[dia]} ${Mes[mes]} ${Cor[cor]}`);
+    if (quoteRef && quoteRef.current) {
+      quoteRef.current.scrollIntoView();
+    }
   }
 
   const generateRandomCurse = () => {
@@ -37,6 +41,9 @@ function App() {
     const corRndNum = getRandomInt(0, 10);
   
     setXingamento(`${Dia[diaRndNum]} ${Mes[Object.keys(Mes)[mesRndNum - 1]]} ${Cor[Object.keys(Cor)[corRndNum]]}`);
+    if (quoteRef && quoteRef.current) {
+      quoteRef.current.scrollIntoView();
+    }
   }
 
   const onDayChange = (e) => {
@@ -82,7 +89,7 @@ function App() {
           </div>
         </div>
 
-        {xingamento && <blockquote className="quote">{xingamento}</blockquote>}
+        {xingamento && <blockquote ref={quoteRef} className="quote">{xingamento}</blockquote>}
 
       </main>
     </div>
