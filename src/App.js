@@ -23,12 +23,11 @@ function getRandomInt(min, max) {
 function App() {
 
   const [dia, setDia] = useState('1');
-  const [mes, setMes] = useState('1');
+  const [mes, setMes] = useState('janeiro');
   const [cor, setCor] = useState('branca');
-  const [xingamento, setXingamento] = useState('');
+  const [xingamento, setXingamento] = useState();
   
-  const generateCurse = (e) => {
-    e.preventDefault();
+  const generateCurse = () => {
     setXingamento(`${Dia[dia]} ${Mes[mes]} ${Cor[cor]}`);
   }
 
@@ -37,7 +36,7 @@ function App() {
     const mesRndNum = getRandomInt(1, 13);
     const corRndNum = getRandomInt(0, 10);
   
-    setXingamento(`${Dia[diaRndNum]} ${Mes[mesRndNum]} ${Cor[Object.keys(Cor)[corRndNum]]}`);
+    setXingamento(`${Dia[diaRndNum]} ${Mes[Object.keys(Mes)[mesRndNum - 1]]} ${Cor[Object.keys(Cor)[corRndNum]]}`);
   }
 
   const onDayChange = (e) => {
@@ -54,35 +53,38 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Xingamento da Dani Generator</h1>
+      <h1 className="title">Xingamento da Dani Generator</h1>
       <main>
-        <form onSubmit={generateCurse}>
-          <div>
-            <label>Escolha um dia:</label>
-            <select onChange={onDayChange}>
-              {createDropdown(Dia)}
-            </select>
+        <div>
+          <div className="form-group">
+            <div className="selection-container">
+              <label>Escolha um dia:</label>
+              <select onChange={onDayChange}>
+                {createDropdown(Dia)}
+              </select>
+            </div>
+            <div className="selection-container">
+              <label>Escolha um mês:</label>
+              <select onChange={onMesChange}>
+                {createDropdown(Mes)}
+              </select>
+            </div>
+            <div className="selection-container">
+              <label>Escolha uma cor de camiseta:</label>
+              <select onChange={onCorChange}>
+                {createDropdown(Cor)}
+              </select>
+            </div>
           </div>
-          <div>
-            <label>Escolha um mês:</label>
-            <select onChange={onMesChange}>
-              {createDropdown(Mes)}
-            </select>
+          <div className="button__container">
+            <input className="button button-main" type="submit" value="Gerar xingamento" onClick={generateCurse} />
+            <button className="button button-secondary" onClick={generateRandomCurse}>Me xinga!</button>
           </div>
-          <div>
-            <label>Escolha uma cor de camiseta:</label>
-            <select onChange={onCorChange}>
-              {createDropdown(Cor)}
-            </select>
-          </div>
-          <input type="submit" value="Gerar xingamento" />
-        </form>
+        </div>
 
-        <button onClick={generateRandomCurse}>Me xinga!</button>
+        {xingamento && <blockquote className="quote">{xingamento}</blockquote>}
 
-        <p>{xingamento}</p>
-
-      </main> 
+      </main>
     </div>
   );
 }

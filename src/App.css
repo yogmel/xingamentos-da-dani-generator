@@ -1,5 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Loop&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&family=Vollkorn:wght@800&display=swap');
+
 .App {
   text-align: center;
+  min-height: 100vh;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 20px;
+}
+
+.App::after {
+  content: "";
+  background: url(./img/dani.png) no-repeat right center;
+  background-color: #FFFDE4;
+  background-blend-mode: multiply;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
 }
 
 .App-logo {
@@ -35,4 +58,84 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.title {
+  font-family: 'Vollkorn', serif;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.selection-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+
+  font-family: 'Zen Loop', cursive;
+}
+
+@media (max-width: 768px) {
+  .selection-container {
+    width: 100%;
+  }
+}
+
+.selection-container label {
+  font-size: 35px;
+}
+
+.selection-container > select {
+  border: 2px solid black;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  padding: 2px 5px;
+
+  font-family: 'Open Sans', sans-serif;
+}
+
+.button {
+  margin: 15px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.button-main {
+  background-color: #FADF7F;
+  font-weight: bold;
+}
+
+.button-secondary {
+  background-color: transparent;
+  color: #355834;
+  border: 1px solid #355834;
+}
+
+.quote {
+  background-color: #ca3c25db;
+  height: 50vh;
+  max-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-family: 'Vollkorn', serif;
+  font-size: 30px;
+  padding: 20px;
+  margin: 30px 0;
 }
